@@ -13,7 +13,7 @@ variables:
 
 steps:
 - task: UseDotNet@2
-  displayName: 'Use .NET SDK'
+  displayName: 'Use .NET SDK $(dotnetSdkVersion)'
   inputs:
     version: '$(dotnetSdkVersion)'
 
@@ -22,7 +22,7 @@ steps:
   inputs:
     verbose: false
 
--  script: './node_modules/.bin/node-sass $(wwwrootDir) --output $(wwwrootDir)'
+- script: './node_modules/.bin/node-sass $(wwwrootDir) --output $(wwwrootDir)'
   displayName: 'Compile Sass assets'
 
 - task: gulp@1
@@ -38,7 +38,7 @@ steps:
     command: 'restore'
     projects: '**/*.csproj'
 
--- template: templates/build.yml
+- template: templates/build.yml
   parameters:
     buildConfiguration: 'Debug'
 
